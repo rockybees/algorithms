@@ -10,7 +10,7 @@ In our **Missing Number** example, we define a helper function, `add_all()`, whi
 ### Example Code  
 
 ```python
-def add_all(nums):
+def add_all(nums: list[int]) -> int:
     """
     This function sums all the elements in the given nums.
     """
