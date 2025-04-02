@@ -63,12 +63,10 @@ def missing_number(nums: list[int]) -> int:
         >>> missing_number([3, 0, 1])
         2
     """
-    nums_length = len(nums)
-    sum_expected = int(nums_length * (nums_length + 1) / 2)
-    sum_actual = 0
-    for num in nums:
-        sum_actual = sum_actual + num
-    return sum_expected - sum_actual
+    n = len(nums)
+    expected_total = int((0 + n) * (n + 1) / 2)
+    actual_total = add_all(nums)
+    return expected_total - actual_total
 
 # Test Cases
 assert missing_number([0, 1, 3]) == 2
