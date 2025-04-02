@@ -57,12 +57,12 @@ Although the algorithm is given, try to implement it by yourself first before lo
 
 ```python
 def missing_number(nums: list[int]) -> int:
-    nums_length = len(nums)
-    sum_expected = int(nums_length * (nums_length + 1) / 2)
-    sum_actual = 0
+    n = len(nums)
+    expected_total = int((0 + n) * (n + 1) / 2)
+    actual_total = 0
     for num in nums:
-        sum_actual = sum_actual + num
-    return sum_expected - sum_actual
+        actual_total += num
+    return expected_total - actual_total
 
 # Test Cases
 assert missing_number([0, 1, 3]) == 2
