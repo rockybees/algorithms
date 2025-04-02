@@ -65,7 +65,9 @@ def missing_number(nums: list[int]) -> int:
     """
     n = len(nums)
     expected_total = int((0 + n) * (n + 1) / 2)
-    actual_total = add_all(nums)
+    actual_total = 0
+    for num in nums:
+        actual_total += num
     return expected_total - actual_total
 
 # Test Cases
