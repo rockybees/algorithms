@@ -1,5 +1,5 @@
 ## Problem Statement:
-**Given a string s consisting of words and spaces, return the length of the last word in the string. A word is a maximal substring consisting of non-space characters only.**
+**Given an array of integers `nums` and an integer `target`, return indices of the two numbers such that they add up to `target`. You may assume that each input would have exactly one solution, and you may not use the same element twice. You can return the answer in any order.**
 
 
 ### Step 1: Understand the Problem (Using Examples)
