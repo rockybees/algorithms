@@ -7,23 +7,21 @@
 
 1. **Example 1:**
    ```plaintext
-   Input: s = "Hello World"
-   Output: 5
-   Explanation: The last word is "World" with length 5.
+   Input: nums = [2,7,11,15], target = 9
+   Output: [0,1]
+   Explanation: Because nums[0] + nums[1] == 9, we return [0, 1].
    ```
 
 2. **Example 2:**
    ```plaintext
-   Input: s = "   fly me   to   the moon  "
-   Output: 4
-   Explanation: The last word is "moon" with length 4.
+   Input: nums = [3,2,4], target = 6
+   Output: [1,2]
    ```
 
 3. **Example 3:**
    ```plaintext
-   Input: s = "luffy is still joyboy"
-   Output: 6
-   Explanation: The last word is "joyboy" with length 6.
+   Input: nums = [3,3], target = 6
+   Output: [0,1]
    ```
 
 ---
@@ -31,10 +29,9 @@
 ### Step 2: Develop an Algorithm (Using Pseudocode or Flowchart)
 
 #### Algorithm:
-1. Initialize `i` as the last index of `s`.
-2. Use a while loop to skip spaces from the end.
-3. Count the last word as long as `i >= 0` and `s[i]` is a non-space.
-4. Return the count.
+1. Loop through all pairs of numbers using nested for-loops.
+2. If a pair sums to the target, return their indices.
+3. Return an empty list if no valid pair is found.
 
 ---
 
