@@ -40,19 +40,17 @@
 
 ### Step 3: Translate the Algorithm into Code
 ```python
-def lengthOfLastWord(s: str) -> int:
-    i = len(s) - 1
-    length_last_word = 0
-    while s[i] == ' ':
-        i = i - 1
-    while i >= 0 and s[i] != ' ':
-        length_last_word += 1
-        i -= 1
-    return length_last_word
+def two_sum(nums: list[int], target: int) -> list[int]:
+    for i in range(len(nums)):
+        for j in range(i + 1, len(nums)):
+            if nums[i] + nums[j] == target:
+                return [i, j]
+    return []
 
-assert lengthOfLastWord('   fly me   to   the moon  ') == 4
-assert lengthOfLastWord('luffy is still joyboy') == 6
-assert lengthOfLastWord('Hello World') == 5
+# Test Cases
+assert two_sum([3, 3], 6) == [0, 1]
+assert two_sum([3, 2, 4], 6) == [1, 2]
+assert two_sum([2,7,11,15], 9) == [0, 1]
 
 print("All test cases passed!")
 ```
