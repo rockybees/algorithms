@@ -37,13 +37,11 @@ Return the smallest character in `letters` that is lexicographically greater tha
 Start searching the entire array using lowest and highest indices.
 Repeat the following steps until the search range is empty:
     Find the middle position of the current search range.
-    If the middle value is less than the target value:
+    If the middle value is less than or equal to the target value:
         Narrow the search range to the higher half.
-    Else if the middle value is greater than the target value:
+    Else (the middle value is greater than the target value):
         Narrow the search range to the lower half.
-    Else (the middle value equals the target):
-        Find the target and return its index.
-The search range becomes empty
+Now the search range becomes empty.
 If the low index crosses highest or the high index crosses lowest:
     return the first character indicating the target is not found.
 Else:
