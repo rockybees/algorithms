@@ -10,29 +10,17 @@ You must write an algorithm with O(log n) runtime complexity.**
 
 1. **Example 1:**
    ```plaintext
-   Input: [0, 1, 3]
-   n = 3 (since there are 3 numbers in the list, the range is [0, 1, 2, 3])
-   Expected range: [0, 1, 2, 3]
-   Missing number: 2
+   Input: nums = [-1,0,3,5,9,12], target = 9
+   Output: 4
+   Explanation: 9 exists in nums and its index is 4
    Output: 2
    ```
 
 2. **Example 2:**
    ```plaintext
-   Input: [0, 1, 2, 3]
-   n = 4 (the range should be [0, 1, 2, 3, 4])
-   Expected range: [0, 1, 2, 3, 4]
-   Missing number: 4
-   Output: 4
-   ```
-
-3. **Example 3:**
-   ```plaintext
-   Input: [0]
-   n = 1 (the range should be [0, 1])
-   Expected range: [0, 1]
-   Missing number: 1
-   Output: 1
+   Input: nums = [-1,0,3,5,9,12], target = 2
+   Output: -1
+   Explanation: 2 does not exist in nums so return -1
    ```
 
 ---
@@ -40,71 +28,98 @@ You must write an algorithm with O(log n) runtime complexity.**
 ### Step 2: Develop an Algorithm (Using Pseudocode or Flowchart)
 
 #### Algorithm:
-1. Compute the sum of numbers in the full expected range using the formula: `expected_sum = n * (n + 1) / 2`
-2. Compute the sum of the given list: `actual_sum`
-3. The missing number is the difference: `missing_number = expected_sum - actual_sum`
+```
+Start searching the entire array using lowest and highest indices.
+Repeat the following steps until the search range is empty:
+    Find the middle position of the current search range.
+    If the middle value is less than the target value:
+        Narrow the search range to the higher half.
+    Else if the middle value is greater than the target value:
+        Narrow the search range to the lower half.
+    Else (the middle value equals the target):
+        Find the target and return its index.
+The search range becomes empty, return -1 indicating the target is not found.
+```    
 
 ---
 
 ### Step 3: Translate the Algorithm into Code
+c
+```c
+#include <stdio.h>
+
+int binary_search(int nums[], int size, int target) {
+    int low = 0;
+    int high = size - 1;
+    while (low <= high) {
+        int mid = low + (high - low) / 2;
+        if (nums[mid] < target)
+            low = mid + 1;
+        else if (nums[mid] > target)
+            high = mid - 1;
+        else 
+            return mid;
+    }
+    return -1;
+}
+
+int main() {
+    int nums[] = {2, 3, 5, 9};
+    int index = binary_search(nums, 4, 10);
+    printf("The target's index is: %d\n", index);
+}
+```
+python
 ```python
-def missing_number(nums: list[int]) -> int:
-    """Finds the missing number in the range [0, n] from the given list of n distinct numbers.
-
-    The function computes the expected sum of numbers from 0 to n using the 
-    formula n * (n + 1) / 2 and subtracts the actual sum of the given list.
-
-    Args:
-        nums (list[int]): A list containing n distinct numbers in the range [0, n].
-
-    Returns:
-        int: The missing number in the range.
-
-    Example:
-        >>> missing_number([3, 0, 1])
-        2
-    """
-    n = len(nums)
-    expected_total = int((0 + n) * (n + 1) / 2)
-    actual_total = 0
-    for num in nums:
-        actual_total += num
-    return expected_total - actual_total
-
-# Test Cases
-assert missing_number([0, 1, 3]) == 2
-assert missing_number([0, 1, 2, 3]) == 4
-assert missing_number([0]) == 1
-
-print("All test cases passed!")
+class Solution:
+    def search(self, nums: List[int], target: int) -> int:
+        low = 0
+        high = len(nums) - 1
+        while low <= high:
+            mid = (low + high) // 2
+            if nums[mid] > target:
+                high = mid - 1 
+            elif nums[mid] < target:
+                low = mid + 1 
+            else:
+                return mid
+        return -1
 ```
 
 ### Other Methods: 
-#### Algorithm 2 using XOR
+#### Algorithm 1.1 - high is 1-index higher than the searching range
 ```python
-def missing_number(nums: list[int]) -> int:
-    """Finds the missing number in the range [0, n] using XOR.
+class Solution:
+    def search(self, nums: List[int], target: int) -> int:
+        low = 0
+        high = len(nums)
+        while low < high:
+            mid = (low + high) // 2
+            if (nums[mid] < target):
+                low = mid + 1
+            elif (nums[mid] > target):
+                high = mid
+            else:
+                return mid
+        return -1
+```
 
-    This approach leverages the XOR property: 
-    - x ^ x = 0 (any number XOR itself cancels out)
-    - x ^ 0 = x (XOR with 0 keeps the number unchanged)
-    
-    By XOR-ing all indices and all numbers in the list and the number n, the missing number remains.
-
-    Args:
-        nums (list[int]): A list containing n distinct numbers in the range [0, n].
-
-    Returns:
-        int: The missing number in the range.
-
-    Example:
-        >>> missingNumber([3, 0, 1])
-        2
-    """
-    missing_num = len(nums)
-    for i in range(len(nums)):
-        missing_num ^= i ^ nums[i]
-    return missing_num 
-
-print(missing_number([3, 0, 1])) # Output is 2
+#### Algorithm 2 - recursive
+```python
+class Solution:
+    def search(self, nums: List[int], target: int) -> int:
+        def helper(self, low: int, high: int) -> int:
+            if low > high:
+                return -1
+            mid = floor((low + high) /2)
+            if nums[mid] == target:
+                return mid
+            elif nums[mid] > target:
+                return helper(self, low, mid - 1)
+            else:
+                return helper(self, mid + 1, high)
+            
+        low = 0
+        high = len(nums) - 1
+        return helper(self, low, high)
 ```
